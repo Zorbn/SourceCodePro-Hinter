@@ -7,7 +7,7 @@ out_path = "out"
 control_path = "control"
 out_suffix = "-Hinted"
 control_suffix = "-Control"
-cmd = ["./ttfautohint.exe"]
+cmd = ["./ttfautohint"]
 
 def main():
     for i in os.listdir(in_path):
@@ -22,13 +22,13 @@ def main():
             continue
 
         i_cmd = cmd.copy()
-        
+
         control_file = f"control/{i_name}{control_suffix}.txt"
-        
+
         if isfile(control_file):
             i_cmd.extend(["-m", control_file])
             print("Controlled", i)
-        
+
         i_cmd.extend([join(in_path, i), join(out_path, f"{i_name}{out_suffix}{i_ext}")])
 
         subprocess.run(i_cmd)
